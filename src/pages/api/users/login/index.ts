@@ -14,7 +14,7 @@ const handler = async(req:NextApiRequest , res: NextApiResponse)=>{
             const {email,password}  = req.body
     
             // already exist 
-            const user = await User.findOne({email:email})
+            const user = await User.findOne({email:email})     
             if(!user){
                 res.status(400).json({
                     status:"failure",
@@ -26,7 +26,7 @@ const handler = async(req:NextApiRequest , res: NextApiResponse)=>{
                     res.status(400).json({
                         status:"failure",
                         message:'invalid password'
-                    })
+                })
                 }
                 const tokenData = {
                     id:user._id,
@@ -39,6 +39,7 @@ const handler = async(req:NextApiRequest , res: NextApiResponse)=>{
                     httpOnly:true,
                     maxAge:60 * 60 * 24
                 }))      
+                console.log(user,"logined user"); 
                 return res.status(201).json({
                     message: 'Login Successful',
                     status: "success"

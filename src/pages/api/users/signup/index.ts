@@ -26,6 +26,7 @@ const handler = async(req:NextApiRequest , res:NextApiResponse) =>{
                     password:hashpassword
                 })
                 await newUser.save()
+                console.log(newUser,"new created user here");            
                 res.status(201).json({
                     status:"success",
                     message:"created a user",
